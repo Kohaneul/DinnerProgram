@@ -2,13 +2,11 @@ package com.visit.program.ReservationProgram.web.controller;
 
 import com.visit.program.ReservationProgram.domain.dao.DinnerReservation;
 import com.visit.program.ReservationProgram.domain.dao.Employee;
-import com.visit.program.ReservationProgram.domain.dao.Reservation;
 import com.visit.program.ReservationProgram.domain.dao.session.SessionConst;
 import com.visit.program.ReservationProgram.domain.dto.Login;
 import com.visit.program.ReservationProgram.domain.service.DinnerService;
 import com.visit.program.ReservationProgram.domain.service.EmployeeService;
 import com.visit.program.ReservationProgram.domain.service.LoginService;
-import com.visit.program.ReservationProgram.domain.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -30,31 +28,10 @@ public class LoginController {
     private final LoginService loginService;
     private final DinnerService dinnerService;
     private final EmployeeService employeeService;
-    private final ReservationService reservationService;
 
     @ModelAttribute(name = "renewDate")
     public String renewDate() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy/MM/dd hh:mm:ss"));
-    }
-
-    @GetMapping("/reservation/login/{reservationId}")
-    public String login(@PathVariable("reservationId") Long reservationId, @ModelAttribute("login") Login login) {
-       return "view/Login";
-    }
-
-    @PostMapping("/reservation/login/{reservationId}")
-    public String login2(@PathVariable("reservationId") Long reservationId, @Valid @ModelAttribute("login") Login login, BindingResult bindingResult, HttpSession session, Model model) {
-        Reservation res = reservationService.findOne(reservationId);
-        findEmployeeId(1, res.getVisitor_id(), login, bindingResult);
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("errorMsg", "아이디 or 비밀번호가 틀렸습니다.");
-            return "view/Login";
-        }
-        if (session.getAttribute(SessionConst.EMPLOYEE_ID) == null) {
-            session.setAttribute(SessionConst.EMPLOYEE_ID, res.getEmployee_id());
-        }
-        session.setAttribute(SessionConst.LOGIN_SUCCESS, UUID.randomUUID().toString());
-        return "redirect:/reservation/info/update/" + reservationId;
     }
 
     @GetMapping("/dinner/info/admin")
@@ -100,9 +77,6 @@ public class LoginController {
 
         return "redirect:/dinner/info/update/{id}";
     }
-
-
-
 
 
     private void findEmployeeId(int num, Long id, Login login, BindingResult bindingResult){

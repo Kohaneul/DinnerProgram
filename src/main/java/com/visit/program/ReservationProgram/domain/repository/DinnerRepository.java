@@ -2,10 +2,10 @@ package com.visit.program.ReservationProgram.domain.repository;
 
 import com.visit.program.ReservationProgram.domain.dao.*;
 import com.visit.program.ReservationProgram.domain.dto.DinnerInfoDTO;
+import com.visit.program.ReservationProgram.domain.dto.SelectDateDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

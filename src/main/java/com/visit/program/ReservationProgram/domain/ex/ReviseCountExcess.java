@@ -4,7 +4,7 @@ package com.visit.program.ReservationProgram.domain.ex;
  * */
 public class ReviseCountExcess extends RuntimeException{
     public ReviseCountExcess() {
-        super();
+        super(ErrorMessage.REVISE_COUNT_EXCESS);
     }
 
     public ReviseCountExcess(String message) {

@@ -1,4 +1,4 @@
-package com.visit.program.ReservationProgram.domain.dao;
+package com.visit.program.ReservationProgram.domain.dto;
 
 import lombok.*;
 

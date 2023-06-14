@@ -3,6 +3,7 @@ package com.visit.program.ReservationProgram.web.controller;
 import com.visit.program.ReservationProgram.domain.dao.*;
 import com.visit.program.ReservationProgram.domain.dao.session.SessionConst;
 import com.visit.program.ReservationProgram.domain.dto.DinnerInfoDTO;
+import com.visit.program.ReservationProgram.domain.dto.SelectDateDTO;
 import com.visit.program.ReservationProgram.domain.ex.ErrorMessage;
 import com.visit.program.ReservationProgram.domain.service.DinnerService;
 import com.visit.program.ReservationProgram.domain.service.EmployeeService;
@@ -28,7 +29,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 import static java.lang.Boolean.TRUE;
 
@@ -83,7 +83,7 @@ public class DinnerController {
 
 
     @ModelAttribute(name = "datePerQtyList")
-    public  List<DatePerQty> datePerQtyList(@ModelAttribute("dateDTO")SelectDateDTO dateDTO){
+    public  List<DatePerQty> datePerQtyList(@ModelAttribute("dateDTO") SelectDateDTO dateDTO){
         datePerQtyThreadLocal.set(service.findAllDatePerQty(dateDTO));
         if(dateDTO.getVisit_date1()==null && dateDTO.getVisit_date2()==null){
             datePerQtyThreadLocal.set(service.findAllDatePerQtyFrom7Days());
@@ -131,8 +131,6 @@ public class DinnerController {
     @PostMapping("/dateOfQty/{id}")
     public String searchDateOfQty(@ModelAttribute("updateQty")UpdateDateOfQty updateQty){
         service.updateDateOfQty(updateQty);
-//        List<DatePerQty> datePerQtyList = service.findAllDatePerQtyFrom14Days();
-//        model.addAttribute("datePerQtyList",datePerQtyList);
         return "redirect:/dinner/info/dateOfQty";
     }
 
@@ -166,7 +164,7 @@ public class DinnerController {
         HttpSession session = request.getSession();
         if(session.getAttribute(SessionConst.ADMIN_ID)==null){
             if(before.getIs_checked()){
-                CutStr.ex(ErrorMessage.ALREADY_CHECKED_MSG, request, response,1);
+                CutStr.ex(ErrorMessage.ALREADY_CHECKED_MSG, request, response);
             }
         }
         DinnerReservationUpdate reservation = new DinnerReservationUpdate
@@ -193,8 +191,6 @@ public class DinnerController {
 
         Integer lastQty = service.findLastQty(before.getVisit_date());
         model.addAttribute("hiddenQty",lastQty);
-
-
         model.addAttribute("reservation",reservation);
         model.addAttribute("hiddenValue",reservation.getVisit_date());
         return "dinner/UpdateForm";

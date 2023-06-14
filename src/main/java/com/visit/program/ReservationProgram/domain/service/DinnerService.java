@@ -2,8 +2,8 @@ package com.visit.program.ReservationProgram.domain.service;
 
 import com.visit.program.ReservationProgram.domain.dao.*;
 import com.visit.program.ReservationProgram.domain.dto.DinnerInfoDTO;
+import com.visit.program.ReservationProgram.domain.dto.SelectDateDTO;
 import com.visit.program.ReservationProgram.domain.repository.DinnerRepository;
-import com.visit.program.ReservationProgram.domain.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

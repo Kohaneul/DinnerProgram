@@ -23,7 +23,6 @@ public class DinnerReservationSave {
     @NotEmpty
     private String part_name;
     
-   // @Pattern(regexp = "^0([0-9]{1,2})([0-9]{7,8})$")
     private String phone_number;
     @NotEmpty
     private String password;

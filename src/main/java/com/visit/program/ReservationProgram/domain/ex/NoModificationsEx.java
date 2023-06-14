@@ -5,6 +5,7 @@ package com.visit.program.ReservationProgram.domain.ex;
 public class NoModificationsEx extends RuntimeException {
     private String message;
     public NoModificationsEx() {
+        super(ErrorMessage.NO_MODIFICATION_MSG);
     }
 
 

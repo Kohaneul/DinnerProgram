@@ -4,7 +4,7 @@ package com.visit.program.ReservationProgram.domain.ex;
  * */
 public class AlreadyCheckedEx extends RuntimeException{
     public AlreadyCheckedEx() {
-        super();
+        super(ErrorMessage.ALREADY_CHECKED);
     }
 
     public AlreadyCheckedEx(String message) {

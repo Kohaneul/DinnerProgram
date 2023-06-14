@@ -24,14 +24,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         if(session.getAttribute(SessionConst.LOGIN_SUCCESS)==null){
-            if(session.getAttribute(SessionConst.DINNER_PROGRAM)!=null){
                 response.sendRedirect("/dinner/login/"+requestURI);//로그인 성공을 하지 못하면 로그인 페이지로 다시 돌아감
-                return false;
-            }
-            response.sendRedirect("/reservation/login/"+requestURI);//로그인 성공을 하지 못하면 로그인 페이지로 다시 돌아감
-            return false;
         }
-
             return true;
         }
 
